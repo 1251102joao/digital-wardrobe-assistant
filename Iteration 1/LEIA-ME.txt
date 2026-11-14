@@ -1,0 +1,29 @@
+ASSISTENTE DIGITAL DE VESTUÁRIO - RELATÓRIO ATUALIZADO - GRUPO 1
+
+Abre esta pasta ou o pom.xml no IntelliJ e seleciona JDK 17 ou superior.
+Executa org.UI.Main com --demo para experimentar os menus e os catálogos.
+
+Administrador demo: admin@demo.pt / Admin123!
+Utilizador demo: utilizador@demo.pt / Demo123!
+
+ALTERAÇÕES PRINCIPAIS
+- UC12: tipos de roupa, definidos pelo administrador e escolhidos antes do nome da peça.
+- UC9: estações com designação, sem datas.
+- UC6: escolha explícita de ocasião e estação, sem data.
+- UC10: classes DefinirCaracteristica_UI e DefinirCaracteristica_Controller.
+- AssistenteDigital e GeradorOutfits correspondem aos nomes do novo design.
+
+GERAÇÃO DE OUTFITS PENDENTE
+O grupo optou por aguardar a regra do docente. O UC6 prepara as escolhas e informa
+a pendência sem gerar ou registar pedidos e outfits. A composição não está concluída.
+
+Sem argumentos, o estado fica apenas em memória. Para gravação opcional:
+--dados dados/assistente-atualizado.dat
+Usa um ficheiro novo; os dados de versões anteriores têm um modelo diferente.
+
+Guia: GUIA_INTELLIJ.txt
+Explicação: docs/EXPLICACAO_CODIGO.txt
+Rastreabilidade: docs/DECISOES_E_RASTREABILIDADE.txt
+Testes: sh verificar.sh, verificar.bat ou main org.Tests.TestesAplicacao (113 verificações).
+JavaDoc: gerar com sh javadoc.sh (build/javadoc/index.html)
+Código base e apoio: ORIGEM.txt

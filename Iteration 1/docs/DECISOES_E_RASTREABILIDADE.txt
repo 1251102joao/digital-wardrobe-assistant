@@ -1,0 +1,102 @@
+RASTREABILIDADE PARA O RELATÓRIO ATUALIZADO
+
+Fonte funcional: Relatorio_IT1_Grupo_1_formatado (1) 1.docx, Grupo 1, 51 páginas
+na renderização usada para leitura. O documento do utilizador não foi alterado.
+
+UC1  AdicionarPeca_UI / AdicionarPeca_Controller
+     Tipo de roupa primeiro; nome, cor, estações, ocasiões e características;
+     rascunho, validação local/global e confirmação. Peça inicialmente disponível.
+UC2  RemoverPeca_UI / RemoverPeca_Controller
+     Seleção do próprio guarda-roupa e confirmação obrigatória antes de remover.
+UC3  EditarPeca_UI / EditarPeca_Controller
+     Inclui alteração do tipo de roupa; preserva ID e disponibilidade.
+UC4  MarcarIndisponivel_UI / MarcarIndisponivel_Controller
+     Lista apenas peças disponíveis e marca a selecionada após confirmação.
+UC5  ConsultarGuardaRoupa_UI / ConsultarGuardaRoupa_Controller
+     Mostra também o tipo de roupa nos detalhes; apenas peças do utilizador.
+UC6  SolicitarOutfit_UI / SolicitarOutfit_Controller / GeradorOutfits
+     Ocasião e estação escolhidas explicitamente; não tem datas. GuardaRoupa
+     filtra elegíveis e GeradorOutfits recebe uma PoliticaComposicao separada.
+     A composição de produção está PENDENTE por indicação expressa do utilizador.
+     A política ativa informa a pendência; não são registados pedidos sem resultado.
+UC7  DefinirCor_UI / DefinirCor_Controller
+     Lote temporário de cores, sem duplicados; confirmação e registo integral.
+UC8  DefinirOcasiao_UI / DefinirOcasiao_Controller
+     Lote temporário de ocasiões; confirmação e registo integral.
+UC9  DefinirEstacao_UI / DefinirEstacao_Controller
+     Apenas designação; sem datas, recorrência ou cálculo pelo calendário.
+UC10 DefinirCaracteristica_UI / DefinirCaracteristica_Controller
+     Designação única e descrição obrigatória; definição de uma característica.
+UC11 RegistarUtilizador_UI / RegistarUtilizador_Controller
+     Nome, email e palavra-passe; email único, confirmação e guarda-roupa vazio.
+UC12 DefinirTipoRoupa_UI / DefinirTipoRoupa_Controller
+     Lote de designações de tipos de roupa; duplicados no catálogo e no lote
+     são rejeitados; registo integral só depois de confirmação.
+
+REUTILIZAÇÃO DO CÓDIGO BASE
+
+Mantêm-se Maven, Java 19, os pacotes org.UI, org.Controller, org.Model e org.Utils,
+os menus e o padrão introduzir -> validar -> apresentar -> confirmar -> registar.
+AssistenteDigital retoma o nome da classe de aplicação fornecida na base, conforme
+o novo relatório. Vestuario da base era um exemplo com sigla/descrição; TipoRoupa
+representa agora a categoria com designação prevista no UC12. As peças pessoais
+são PecaVestuario, associadas ao GuardaRoupa do Utilizador.
+O ZIP original continua em referencias/codigoBase-original.zip para comparação.
+
+RDD E GRASP
+
+- GuardaRoupa é Creator das peças e Information Expert sobre nomes e pertença.
+- PecaVestuario valida dados locais e a sua adequação ao contexto escolhido.
+- AssistenteDigital é a classe de aplicação que conhece catálogos, contas e sessão.
+- Utilizador cria o seu guarda-roupa e os pedidos e conhece os resultados registados.
+- GeradorOutfits é o serviço de composição/Pure Fabrication do novo design.
+- Cada Controller coordena o UC e mantém os dados ainda em preparação.
+- UI solicita escolhas e apresenta resultados e confirmações.
+
+DECISÕES TÉCNICAS E LIMITES
+
+1) As assinaturas concretas são tipadas e os rascunhos são preparados por setDados;
+   este método realiza a operação preparar(dados) dos diagramas. A confirmação
+   dos UC de peças chama registarPeca, guardarAlteracoes ou removerPeca. O UC6 usa
+   selecionarOcasiao, selecionarEstacao e confirmar, como o seu diagrama de design.
+
+2) Não foi inventada uma regra de outfit completo. O utilizador escolheu manter a
+   composição pendente até definição pelo docente. PoliticaComposicao.pendente()
+   é a política ativa. Não existe argumento de execução que ative a política dos
+   testes, nem uma lista filtrada apresentada como combinação aprovada.
+   O serviço e o registo após resultado estão preparados e testados tecnicamente
+   com políticas injetadas apenas pelos testes. Isso não conclui a regra de negócio.
+
+3) O catálogo de tipos não ganha categorias ocultas como cima/baixo/calçado. TipoRoupa
+   tem apenas a designação prevista no relatório. Eventuais categorias necessárias
+   à composição devem ser discutidas com o cliente juntamente com a regra.
+
+4) O modo normal mantém o estado em memória, refletindo a distinção expressa no
+   relatório entre registar e persistir. A gravação local anterior foi conservada
+   como opção técnica explícita --dados, desligada por omissão. Não é um novo UC.
+   O formato é específico desta versão, sem migração automática de dados antigos.
+
+5) A autenticação concretiza as pré-condições já existentes. Não é um UC adicional.
+   O primeiro arranque cria um administrador; o registo público cria contas comuns.
+   As credenciais são protegidas com PBKDF2, salt aleatório e sem texto simples.
+   A política funcional mínima continua a ser palavra-passe não vazia, pois outras
+   regras de composição da palavra-passe continuam por validar no relatório.
+
+6) PecaVestuario é imutável: editar substitui a versão, mantendo ID e disponibilidade.
+   Isso permite conservar versões antigas caso sejam registados resultados no
+   futuro. A remoção do guarda-roupa atual é definitiva, sem recuperação implementada.
+
+7) A unicidade ignora maiúsculas, espaços exteriores/repetidos e composição Unicode;
+   preserva acentos. Coleções devolvidas por getters são imutáveis.
+
+8) Não há UC de consultar histórico, repor disponibilidade, editar/remover catálogos,
+   meteorologia, preferências ou avaliações. Essas evoluções continuam fora do âmbito.
+
+PENDÊNCIAS DO RELATÓRIO
+
+- Validar com o docente a regra de combinação completa e escolha entre alternativas.
+- Definir a responsabilidade pelo UC12, ainda como A atribuir no anexo.
+- Decidir a reposição de disponibilidade, conservação de resultados e eventual
+  persistência obrigatória, se esses assuntos entrarem numa próxima iteração.
+- O grupo deve rever e compreender o código e manter o seu histórico real de Git.
+  Não foram criados repositórios remotos ou commits em nome dos alunos.

@@ -1,0 +1,51 @@
+VALIDAÇÃO PARA O RELATÓRIO ATUALIZADO - 25/10/2026
+
+REGRAS E INTEGRAÇÃO
+- Compilação com javac --release 19 -encoding UTF-8.
+- Testes executados em Java 25 e Corretto Java 19: PASSOU, 104 verificações (113 com os testes dos catálogos predefinidos, em Java 21 com --release 17).
+- Os testes não dependem de JUnit nem de bibliotecas externas.
+- JavaDoc gerado sem erros nem avisos.
+- POM e configurações .run validados como XML.
+
+As verificações abrangem contas, autenticação, permissões, cinco catálogos,
+unicidade, lotes e rascunhos sem efeitos antes de confirmação, tipos de roupa,
+edição, remoção, disponibilidade, isolamento entre utilizadores, estações sem
+datas e escolhas explícitas do pedido de outfit.
+
+UC6: a política ativa permanece pendente, conforme indicação do utilizador.
+Foi testado que essa pendência não regista pedidos, não cria outfits e não
+altera o guarda-roupa. O serviço tem também testes técnicos com políticas
+injetadas apenas no programa de testes, para verificar o encadeamento e os
+controlos de integridade. Esses testes não aprovam nem definem uma regra de
+composição para o produto. A geração de negócio continua por implementar após
+validação da regra pelo docente.
+
+CONSOLE E EXECUÇÃO
+PASSOU: Utilizador: UC1 a UC5; UC6 com estação manual e geração pendente
+PASSOU: UC1 pede o tipo de roupa antes do nome
+PASSOU: Administrador e visitante: UC7 a UC12, duplicados e confirmação de lotes
+PASSOU: Sem argumentos: registo apenas em memória, conforme o relatório
+PASSOU: Gravação opcional: configuração, cinco catálogos, registo e peça
+PASSOU: Reinício e UC6 pendente preservam o ficheiro de dados
+PASSOU: Cancelamento de remoção preserva o ficheiro de dados
+PASSOU: Fim de entrada termina sem ciclos infinitos
+PASSOU: Ficheiro de versão antiga rejeitado sem alteração de conteúdo
+
+PERSISTÊNCIA OPCIONAL
+Testados carregamento, sessão transitória, preservação dos tipos e estações,
+ausência das palavras-passe demo em texto simples, falha de escrita sem
+publicação da alteração e preservação de ficheiros danificados/incompatíveis.
+O modo sem argumentos também foi testado: não cria ficheiros.
+
+LIMITES
+- Scripts .sh e JAR executados em macOS; scripts .bat não executados em Windows.
+- Não foi realizada interação manual com a interface do IntelliJ nesta revisão.
+- A cache Maven continua sem todas as dependências dos plugins. Não foi repetida
+  a tentativa de empacotar offline; a compilação, os testes e o JAR foram produzidos
+  diretamente com o JDK. A importação é um projeto Maven convencional, mas os
+  plugins podem exigir internet na primeira utilização. Há scripts sem Maven.
+- A validação funcional de regras de composição reais depende da decisão futura
+  do cliente/docente e não é apresentada como concluída.
+
+REPETIR
+sh verificar.sh, verificar.bat ou executar o main org.Tests.TestesAplicacao.

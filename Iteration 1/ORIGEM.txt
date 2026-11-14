@@ -1,0 +1,22 @@
+ORIGEM DOS MATERIAIS E APOIO AO DESENVOLVIMENTO
+
+1. Código base fornecido pelo utilizador
+   codigoBase_TP_2026_27 (1).zip, UC Análise e Modelação de Sistemas, 2026/27.
+   Os ficheiros identificam Dulce Mota e, em Utils, Paulo Maio e Dulce Mota.
+   Mantidos/adaptados a organização Maven, UI/Controller/Model/Utils, os menus
+   e o padrão de confirmação. Original em referencias/codigoBase-original.zip.
+
+2. Especificação funcional desta versão
+   Relatorio_IT1_Grupo_1_formatado (1) 1.docx, Grupo 1, fornecido pelo utilizador.
+   SHA256: 29b8247c07c79a733e12a94f9b6b68af24343250983d453b96c2af2ded215c4f
+   Lido sem alterar o documento original. Substitui o relatório anterior como
+   referência de funcionalidades, incluindo os tipos de roupa e as estações sem datas.
+
+3. Contexto do trabalho
+   ANAMS_2026_27_Enunciado_IT1.pdf, fornecido pelo utilizador.
+
+4. Apoio de IA e decisão do utilizador
+   Código adaptado, documentado e testado com apoio de OpenAI Codex em 25/10/2026.
+   O utilizador indicou expressamente que a geração de outfits deve ficar pendente
+   até o docente definir a regra. Nenhuma política de composição foi apresentada
+   como validada pelo docente. A revisão e compreensão do projeto cabem ao grupo.
