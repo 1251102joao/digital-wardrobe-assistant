@@ -40,8 +40,8 @@ Design choices worth noting:
 Requires **JDK 17 or newer**. No external libraries.
 
 ```bash
-git clone https://github.com/1251102joao/ANAMS_digital-wardrobe-assistant.git
-cd "ANAMS_digital-wardrobe-assistant/Iteration 1"
+git clone https://github.com/1251102joao/digital-wardrobe-assistant.git
+cd "digital-wardrobe-assistant/Iteration 1"
 
 sh verificar.sh        # compile and run the 113 checks (Windows: verificar.bat)
 sh compilar.sh         # build dist/assistente-vestuario.jar (Windows: compilar.bat)
