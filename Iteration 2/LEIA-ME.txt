@@ -1,0 +1,34 @@
+ASSISTENTE DIGITAL DE VESTUÁRIO - ITERAÇÃO 2 - GRUPO 1
+
+Abre esta pasta ou o pom.xml no IntelliJ e seleciona JDK 17 ou superior.
+Executa org.UI.Main com --demo para experimentar os menus e os catálogos.
+No arranque escolhe o idioma (português, inglês ou francês), ou usa --lingua pt|en|fr.
+
+Administrador demo: admin@demo.pt / Admin123!
+Utilizador demo: utilizador@demo.pt / Demo123!
+
+ALTERAÇÕES DA ITERAÇÃO 2
+- UC10 (Definir característica) retirado: as características passam a ser uma lista fixa do sistema.
+- Uma peça pode ter uma ou mais cores e estar associada a uma ou mais partes do corpo.
+- Todos os dados pedidos ao utilizador são obrigatórios (também as características).
+- UC6 gera agora o outfit: cobre tronco, pernas e pés (ComposicaoPorPartesCorpo).
+- UC13 Avaliar outfit (nota de 0 a 10) e UC14 Consultar histórico de recomendações e avaliações.
+- Interface em português, inglês e francês (org.Utils.Idioma e org.Utils.Traducoes).
+- Catálogos predefinidos mantidos (tipos de roupa, cores, estações, ocasiões).
+
+REGRA DE COMPOSIÇÃO (a validar com o docente)
+O enunciado não define como se compõe um outfit. Foi implementada uma regra simples e isolada em
+PoliticaComposicao: o outfit tem de cobrir tronco, pernas e pés; entre as peças elegíveis prefere-se
+a que cobre mais partes de uma só vez (um vestido cobre tronco e pernas). Se não for possível,
+o pedido não é registado e o utilizador é informado. Trocar a regra só exige outra PoliticaComposicao.
+
+Sem argumentos, o estado fica apenas em memória. Para gravação opcional:
+--dados dados/assistente-atualizado.dat
+Usa um ficheiro novo; os dados de versões anteriores têm um modelo diferente.
+
+Guia: GUIA_INTELLIJ.txt
+Explicação: docs/EXPLICACAO_CODIGO.txt
+Rastreabilidade: docs/DECISOES_E_RASTREABILIDADE.txt
+Testes: sh verificar.sh, verificar.bat ou main org.Tests.TestesAplicacao (130 verificações).
+JavaDoc: gerar com sh javadoc.sh (build/javadoc/index.html)
+Código base e apoio: ORIGEM.txt

@@ -1,0 +1,83 @@
+COMO LER O CÓDIGO DESTA VERSÃO
+
+Começa por src/main/java/org/UI/Main.java. O main escolhe entre dados em memória,
+demonstração com --demo ou gravação opcional com --dados. Depois cria MenuInicial_UI.
+MenuInicial_UI permite registar-se como visitante ou iniciar sessão. Após autenticar,
+abre MenuAdm_UI ou MenuUtF_UI conforme o papel da conta.
+
+UI: INTERAÇÃO COM A CONSOLA
+
+Cada UC tem uma classe terminada em _UI. O método run apresenta listas, lê os dados,
+mostra o resumo e solicita confirmação. FormularioPeca_UI é comum a adicionar e
+editar: seleciona o TipoRoupa antes de pedir o nome, depois cor, estações, ocasiões
+e características. Os campos múltiplos aceitam opções separadas por vírgulas.
+
+CONTROLLER: COORDENAÇÃO E RASCUNHOS
+
+Cada _Controller recebe ContextoAplicacao. Os controladores de definição de catálogos
+guardam uma listagem temporária, validam cada elemento e registam só após confirmação.
+AdicionarPeca e EditarPeca mantêm uma PecaVestuario em preparação. Pecas_Controller
+reúne consultas e validações comuns e garante acesso ao guarda-roupa atual.
+
+Exemplo UC1:
+MenuUtF_UI -> AdicionarPeca_UI -> FormularioPeca_UI -> AdicionarPeca_Controller
+-> AssistenteDigital / GuardaRoupa -> PecaVestuario.
+
+setDados prepara um rascunho. registarPeca executa a alteração confirmada. Antes de
+confirmar, não há uma nova peça no guarda-roupa. Se o nome já existir, o modelo
+rejeita o registo e a UI permite repetir a operação ou cancelar.
+
+MODELO: DADOS E REGRAS
+
+AssistenteDigital: classe de aplicação que conhece catálogos, contas e sessão.
+Utilizador: nome, email, hash da palavra-passe, papel, guarda-roupa e pedidos.
+GuardaRoupa: coleção de peças do utilizador, unicidade de nomes e filtragem de elegíveis.
+PecaVestuario: ID, nome, tipo, cor, estações, ocasiões, características e disponibilidade.
+Referencia: designação e comparação comuns às referências.
+TipoRoupa, Cor, Ocasiao e Estacao: referências com designação obrigatória.
+Caracteristica: referência com designação e descrição obrigatórias.
+Outfit: versões das peças de uma combinação válida.
+PedidoOutfit: ocasião, estação e resultado, sem data.
+
+Editar cria uma nova versão da peça com o mesmo UUID. List.copyOf protege as
+coleções devolvidas contra alterações externas. private limita o acesso direto
+aos atributos; public permite chamar métodos. final impede reatribuir o atributo,
+mas uma lista final continua a poder receber elementos dentro da classe que a gere.
+
+UC6: FILTRAGEM E COMPOSIÇÃO SÃO OPERAÇÕES DIFERENTES
+
+SolicitarOutfit_Controller guarda a ocasião e a estação escolhidas. confirmar()
+valida novamente, obtém o guarda-roupa e chama filtrarElegiveis. A peça é elegível
+se estiver disponível e associada às duas referências selecionadas.
+
+GeradorOutfits recebe essas candidatas e uma PoliticaComposicao. Verifica o resultado
+da política e só cria Outfit se houver uma combinação não vazia, sem peças repetidas
+ou externas às candidatas. O controlador então pede a Utilizador.criarPedido e
+registarPedido para associar o resultado ao utilizador.
+
+A política ativa é ComposicaoPorPartesCorpo: precisa de cobrir tronco, pernas e pés, preferindo
+as peças que cobrem mais partes de uma só vez. Se não for possível, o pedido não é registado.
+Para trocar a regra basta implementar PoliticaComposicao e configurá-la no contexto.
+Depois do pedido, UC13 (AvaliarOutfit_*) regista a nota (0 a 10) no PedidoOutfit e UC14
+(ConsultarHistorico_*) lista os pedidos e as avaliações do utilizador.
+
+SUPORTE TÉCNICO
+
+ContextoAplicacao trabalha numa cópia do AssistenteDigital. Executa a operação,
+guarda opcionalmente e publica a nova versão só se tiver sucesso. Uma exceção
+impede publicar a alteração. No modo em memória não se escreve em disco.
+
+Persistence/Serializacao converte o estado em bytes e limita as classes aceites na
+leitura. RepositorioDados grava esses bytes com substituição do ficheiro após escrita.
+Não é uma base de dados em rede nem suporta duas execuções a escrever no mesmo ficheiro.
+
+Utils lê respostas por um único BufferedReader, valida opções e trata cancelamento
+e fim da entrada. Validacao verifica campos obrigatórios e normaliza comparações.
+PalavraPasse calcula PBKDF2 e verifica a tentativa sem devolver a palavra-passe.
+DadosDemonstracao constrói um cenário de exemplo pelas mesmas regras dos UC.
+
+TESTES
+
+src/test/java/org/Tests/TestesAplicacao.java é um programa de testes independente.
+Executa o main para verificar as regras, incluindo a pendência explícita da composição.
+As políticas artificiais presentes nesse ficheiro só existem nos testes.

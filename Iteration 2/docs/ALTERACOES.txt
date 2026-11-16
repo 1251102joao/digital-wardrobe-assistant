@@ -1,0 +1,25 @@
+ALTERAÇÕES DA ITERAÇÃO 2
+
+- UC10 retirado: características como lista fixa do sistema, já preenchida.
+- PecaVestuario com várias cores (List<Cor>) e partes do corpo (ParteCorpo, lista fixa).
+- Todos os dados obrigatórios: passam a ser exigidas também as características.
+- UC6 gera outfits (ComposicaoPorPartesCorpo); ComposicaoPendenteException deixou de ser usada.
+- UC13 Avaliar outfit (0 a 10) e UC14 Consultar histórico de recomendações e avaliações.
+- Interface em português, inglês e francês (Idioma, Traducoes).
+- Testes: 130 verificações (contas, catálogos, peças, outfits, avaliação, histórico, idiomas, persistência).
+
+ALTERAÇÕES DA ITERAÇÃO 1 (RELATÓRIO ATUALIZADO)
+
+- Acrescentados TipoRoupa, DefinirTipoRoupa_UI e DefinirTipoRoupa_Controller (UC12).
+- Tipo de roupa obrigatório, escolhido antes do nome e apresentado na consulta.
+- Tipo editável no UC3, preservando o identificador e a disponibilidade da peça.
+- Removidas todas as datas de Estacao, PedidoOutfit e dos respetivos formulários.
+- UC6 recebe ocasião e estação explicitamente, em qualquer altura do ano.
+- GuardaRoupa filtra elegíveis; GeradorOutfits recebe uma política de composição.
+- Geração efetiva pendente até definição pelo docente, por indicação do utilizador.
+- Não são registados pedidos ou outfits sem resultado válido.
+- AssistenteVestuario renomeado para AssistenteDigital, conforme o design atualizado.
+- GerirCaracteristica renomeado para DefinirCaracteristica, conforme o UC10 atualizado.
+- Estado em memória por omissão; gravação local conservada como opção explícita.
+- Mantidos apenas os UC do relatório, sem as antigas opções adicionais.
+- Guias, explicação, testes, JavaDoc e JAR atualizados para esta versão.

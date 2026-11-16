@@ -1,0 +1,187 @@
+GUIA DO INTELLIJ PARA O RELATÓRIO ATUALIZADO
+Assistente Digital de Vestuário | Grupo 1 | Iteração 1
+
+1. QUAL É A VERSÃO CERTA
+
+Este projeto corresponde ao ficheiro Relatorio_IT1_Grupo_1_formatado (1) 1.docx.
+Inclui o UC12 de tipos de roupa e os nomes de classes do novo design.
+As estações têm apenas designação. O utilizador escolhe a estação no pedido;
+não introduz datas. O tipo de roupa é a primeira seleção no registo da peça.
+
+Na Iteração 2, o UC6 gera o outfit: cobre tronco, pernas e pés com as peças disponíveis
+adequadas à ocasião e à estação escolhidas. O UC13 permite avaliar o outfit (0 a 10) e o
+UC14 mostra o histórico de recomendações e avaliações.
+
+2. ABRIR O PROJETO
+
+1) Extrai projetoIT1Grupo01_atualizado.zip no Finder com duplo clique.
+2) Abre o IntelliJ e escolhe File > Open.
+3) Seleciona a NOVA pasta projetoIT1Grupo01_atualizado, que contém pom.xml e src.
+4) Se for perguntado, importa como projeto Maven e confirma Trust Project.
+5) Aguarda a indexação. As pastas das versões anteriores ficam independentes.
+
+Para ver o código, abre o painel Project (no Mac, Command + 1) e expande:
+src > main > java > org
+
+Dentro de org estão UI, Controller, Model, Utils e Persistence.
+O ponto de arranque é UI > Main.java. Os ficheiros .java contêm o código fonte;
+o ficheiro em dist é apenas o programa já compilado para executar.
+
+3. DEFINIR O JDK
+
+Usa o JDK 17 ou qualquer superior.
+Em File > Project Structure > Project, seleciona esse JDK em Project SDK e aplica.
+
+Se a lista estiver vazia, abre SDKs, carrega em + > Add JDK e seleciona a pasta:
+/Users/pikigui/Library/Java/JavaVirtualMachines/corretto-19.0.2/Contents/Home
+
+No seletor de pastas do Mac, Command + Shift + G permite colar o caminho.
+O projeto compila com release 17, por isso corre em JDK 17 ou superior.
+
+4. EXECUTAR A DEMONSTRAÇÃO
+
+1) No seletor de execução do IntelliJ, escolhe Demonstração e carrega no botão Run.
+2) Se a configuração não aparecer, abre UI > Main.java e executa o método main.
+3) Em Run > Edit Configurations, coloca --demo em Program arguments.
+4) Usa como Working directory a pasta projetoIT1Grupo01_atualizado.
+
+Contas de demonstração:
+Administrador: admin@demo.pt       Palavra-passe: Admin123!
+Utilizador:    utilizador@demo.pt  Palavra-passe: Demo123!
+
+O modo demo começa com cinco tipos de roupa, quatro estações, três cores, três
+ocasiões, uma característica e três peças no guarda-roupa do utilizador demo.
+As alterações feitas neste modo desaparecem ao terminar a execução.
+
+5. ONDE ESTÁ CADA CASO DE USO
+
+Menu inicial: 1 abre o menu do visitante; 2 inicia sessão; 0 termina a aplicação.
+
+Menu do utilizador:
+1 - Adicionar peça (UC1)
+2 - Remover peça (UC2)
+3 - Editar peça (UC3)
+4 - Marcar peça como indisponível (UC4)
+5 - Consultar guarda-roupa (UC5)
+6 - Solicitar outfit (UC6)
+7 - Avaliar outfit (UC13)
+8 - Consultar histórico de recomendações e avaliações (UC14)
+0 - Terminar sessão
+
+Menu do administrador:
+1 - Definir listagem de cores (UC7)
+2 - Definir ocasiões (UC8)
+3 - Definir estações do ano (UC9)
+4 - Definir tipos de roupa (UC12)
+0 - Terminar sessão
+
+Menu do visitante:
+1 - Fazer registo (UC11)
+0 - Voltar
+
+Não existem opções adicionais de repor disponibilidade ou consultar catálogos como um caso de uso independente. A autenticação é suporte
+às pré-condições dos UC e não é apresentada como um UC.
+
+6. EXPERIMENTAR AS PEÇAS E O UC6
+
+Inicia sessão como utilizador demo e escolhe 1 para adicionar uma peça.
+Primeiro selecionas o tipo de roupa, depois introduzes o nome. Seguem-se cores,
+partes do corpo, estações, ocasiões e características (todas obrigatórias). Confirma com S para registar.
+
+Nas seleções múltiplas, escreve por exemplo 1,2. A peça precisa de pelo menos
+uma cor, uma parte do corpo, uma estação, uma ocasião e uma característica.
+
+Para experimentar o UC6:
+1) Escolhe 6 no menu do utilizador.
+2) Escolhe uma ocasião, por exemplo Aulas.
+3) Escolhe qualquer estação, por exemplo Inverno. Não é pedida uma data.
+4) Confirma com S.
+5) A aplicação mostra o outfit sugerido e regista o pedido no histórico.
+6) Escolhe 7 para avaliar o outfit com uma nota de 0 a 10 (c cancela) e 8 para ver o histórico.
+
+Se as peças disponíveis não cobrirem tronco, pernas e pés, a aplicação informa que não é
+possível formar uma combinação e não regista nenhum pedido.
+
+7. COMEÇAR SEM OS DADOS DE DEMONSTRAÇÃO
+
+Executa org.UI.Main sem argumentos, ou escolhe a configuração Aplicação.
+Este modo mantém o estado em memória, como descrito no relatório atualizado.
+
+Na primeira execução:
+1) Cria e confirma a conta de administrador.
+2) Os catálogos já vêm preenchidos com valores iniciais (12 tipos de roupa, 12 cores,
+   4 estações e 7 ocasiões); as 8 características e as 7 partes do corpo são listas fixas. Inicia sessão como administrador para acrescentar outros.
+3) Os valores iniciais só são carregados nos catálogos que estiverem vazios.
+4) Para mais opções usa: cores (1), ocasiões (2), estações (3), tipos (4).
+5) Termina a sessão, abre Visitante e regista um utilizador pelo UC11.
+6) Inicia sessão com esse utilizador e regista as suas peças.
+
+Nos lotes de cores, ocasiões, estações e tipos, 0 termina a introdução e S confirma
+a listagem inteira. Uma designação duplicada é rejeitada e pode ser corrigida.
+No UC9, introduz apenas nomes como Primavera, Verão, Outono e Inverno.
+
+Sem argumentos, os dados desaparecem quando fechas a aplicação. O relatório
+distingue registar no estado da aplicação de guardar entre execuções.
+
+8. GRAVAÇÃO LOCAL OPCIONAL
+
+Para manter dados entre execuções, usa Program arguments:
+--dados dados/assistente-atualizado.dat
+
+É uma opção técnica separada do âmbito funcional do relatório, desligada por
+omissão. O programa mostra o caminho do ficheiro no arranque. Mantém a mesma
+Working directory para encontrar os mesmos dados na execução seguinte.
+
+Não carregues ficheiros .dat das versões antigas: o modelo mudou para incluir
+tipos de roupa e estações sem datas. Usa um caminho novo. Ficheiros incompatíveis
+são rejeitados e preservados. Usa apenas uma execução de cada vez por ficheiro.
+Se uma gravação falhar, a alteração não é publicada em memória.
+
+9. CANCELAR E CORRIGIR
+
+- Escreve 0 em qualquer pergunta de texto para cancelar a operação.
+- Nas listas de cores, ocasiões, estações e tipos, 0 termina a introdução (e N na confirmação descarta tudo).
+- Nas seleções múltiplas obrigatórias, 0 cancela; nas características da peça, 0 significa nenhuma.
+- N numa confirmação também cancela sem registar alterações.
+- Numa lista de seleção única, 0 cancela a seleção.
+- Dados inválidos são assinalados; a aplicação permite corrigir ou repetir.
+- Na edição, introduz os dados completos que devem ficar na peça.
+- No IntelliJ, a palavra-passe pode ficar visível enquanto escreves na consola.
+  A aplicação guarda apenas hash e salt da palavra-passe.
+
+10. TESTES, COMPILAÇÃO E JAVADOC
+
+No IntelliJ, abre src > test > java > org > Tests > TestesAplicacao e executa o main,
+ou usa a configuração Testes. Resultado esperado: PASSOU: 130 verificações.
+Os testes não alteram o teu ficheiro de dados; usam memória e diretórios temporários.
+
+Em macOS/Linux, no terminal da pasta do projeto:
+sh verificar.sh
+sh executar.sh --demo
+
+Em Windows, no terminal cmd da pasta do projeto:
+verificar.bat
+executar.bat --demo
+
+Para compilar depois de alterares o código:
+sh compilar.sh (macOS/Linux), ou compilar.bat (Windows).
+O script executar usa o JAR existente; o IntelliJ recompila as fontes ao executar
+uma configuração Application. O JAR incluído pode ser executado com:
+sh compilar.sh (ou compilar.bat) e depois java -jar dist/assistente-vestuario.jar --demo
+
+O projeto não tem bibliotecas externas de execução. O Maven pode precisar de
+internet para obter os seus plugins. A construção por JDK funciona sem Maven.
+Os testes são um programa Java próprio e não são executados por mvn test/package.
+
+JavaDoc: gerar com sh javadoc.sh (build/javadoc/index.html).
+Para regenerar: sh javadoc.sh ou Tools > Generate JavaDoc no IntelliJ.
+
+11. ENTENDER E DEFENDER O CÓDIGO
+
+Lê docs/EXPLICACAO_CODIGO.txt para acompanhar as classes e o percurso dos UC.
+Lê docs/DECISOES_E_RASTREABILIDADE.txt para a correspondência com o novo relatório.
+Lê docs/VALIDACAO.txt para os testes e os limites da verificação.
+Lê ORIGEM.txt para as fontes e o apoio ao desenvolvimento.
+
+A regra de composição (ComposicaoPorPartesCorpo) é uma proposta do grupo, ainda não validada pelo docente.
+Se for alterada, basta fornecer outra PoliticaComposicao ao GeradorOutfits.

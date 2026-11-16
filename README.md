@@ -43,7 +43,7 @@ Requires **JDK 17 or newer**. No external libraries.
 git clone https://github.com/1251102joao/digital-wardrobe-assistant.git
 cd "digital-wardrobe-assistant/Iteration 1"
 
-sh verificar.sh        # compile and run the 113 checks (Windows: verificar.bat)
+sh verificar.sh        # compile and run the checks (130 in Iteration 2) (Windows: verificar.bat)
 sh compilar.sh         # build dist/assistente-vestuario.jar (Windows: compilar.bat)
 java -jar dist/assistente-vestuario.jar --demo
 ```

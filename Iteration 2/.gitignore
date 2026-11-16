@@ -1,0 +1,9 @@
+# Adaptado do .gitignore do código base. Não versionar dados pessoais nem ficheiros locais do IDE.
+target/
+build/
+.idea/
+*.iml
+.DS_Store
+dados/
+*.dat
+*.tmp

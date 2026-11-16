@@ -1,0 +1,17 @@
+VALIDAÇÃO DA ITERAÇÃO 2
+
+- Compilação com javac --release 17 -encoding UTF-8.
+- Testes: PASSOU, 130 verificações (sem JUnit nem bibliotecas externas).
+- Cobrem contas, permissões, catálogos fixos e predefinidos, peças com várias cores e partes do
+  corpo, todos os dados obrigatórios, UC6 (composição por partes do corpo), UC13 (nota 0 a 10),
+  UC14 (histórico por utilizador), idiomas (pt, en, fr) e persistência opcional.
+- Simulação da consola em inglês: pedir outfit, avaliá-lo e consultar o histórico.
+
+LIMITES
+- A regra de composição de outfits é uma proposta do grupo; não foi validada pelo docente.
+- As traduções para inglês e francês não foram revistas por falantes nativos.
+- Scripts .bat e a interface do IntelliJ não foram executados em Windows nesta revisão.
+- Os requisitos de desempenho (3 s em 96% dos pedidos, 70% CPU, 1 GB RAM) não foram medidos formalmente.
+
+REPETIR
+sh verificar.sh, verificar.bat ou executar o main org.Tests.TestesAplicacao.
